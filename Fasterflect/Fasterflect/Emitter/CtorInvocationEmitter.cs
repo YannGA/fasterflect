@@ -51,9 +51,9 @@ namespace Fasterflect.Emitter
 			             .initobj( CallInfo.TargetType )            // init_obj(&tmp)
 			             .ldloc_0.end();                            // load tmp
 			}
-			else if (CallInfo.TargetType.IsArray)
+			else if (CallInfo.TargetType.IsArray && CallInfo.TargetType.GetArrayRank() == 1)
 			{
-			    Generator.ldarg_0                                           // load args[] (method arguments)
+                Generator.ldarg_0                                           // load args[] (method arguments)
                          .ldc_i4_0                                          // load 0
                          .ldelem_ref                                        // load args[0] (length)
                          .unbox_any( typeof(int) )                          // unbox stack
